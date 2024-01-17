@@ -1,0 +1,23 @@
+version: '3'
+services:
+  db:
+    image: mariadb
+    environment:
+      - MARIADB_ROOT_PASSWORD=secret-pass
+    volumes:
+      - "./db:/docker-entrypoint-initdb.d"
+      #- "./permanent_db:/var/lib/mysql"
+  php:
+    image: php:apache
+    volumes:
+      - "./html:/var/www/html"
+      - "./confs/docker-php.conf:/etc/apache2/conf-available/docker-php.conf"
+    ports:
+      - 8080:80
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    ports:
+      - 8081:80
+    environment:
+      - PMA_HOST=db
+      - PMA_PORT=3306
