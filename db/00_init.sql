@@ -60,6 +60,24 @@ CREATE TABLE IF NOT EXISTS products_categories (
     FOREIGN KEY (category_id) REFERENCES categories(category_id)
 );
 
+-- Tabla filtros
+CREATE TABLE IF NOT EXISTS filters (
+    filter_id INT AUTO_INCREMENT PRIMARY KEY,
+    filter_name VARCHAR(255),
+    filter_desc TEXT
+);
+
+-- Tabal productos-filtros
+CREATE TABLE IF NOT EXISTS products_filters (
+    product_id INT,
+    filter_id INT,
+    PRIMARY KEY (product_id, filter_id),
+    FOREIGN KEY (product_id) REFERENCES products(product_id),
+    FOREIGN KEY (filter_id) REFERENCES filters(filter_id)
+);
+
+
+
 -- Tabla promociones
 CREATE TABLE IF NOT EXISTS deals (
     deal_id INT AUTO_INCREMENT PRIMARY KEY,
