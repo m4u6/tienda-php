@@ -1,13 +1,17 @@
 <?php
-require 'config/config.php';
-require 'config/db.php';
+require_once 'includes/config.php';
+require_once 'includes/db.php';
+require_once 'includes/login.inc.php';
+
 define('PAGE_TITLE', 'Login');
+require_once 'includes/header.inc.php';
 
 
-include 'includes/header.php';
-
-print_r(hash_pbkdf2("sha256", "password", PASSWORD_SALT, 8000));
+show_login();
 
 
-include 'includes/footer.php';
+
+
+
+require_once 'includes/footer.inc.php';
 ?>

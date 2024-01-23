@@ -1,7 +1,8 @@
 <?php
 # DB
 define('DB_HOST', 'db');
-define('DB_PORT', '3306');
+define('DB_PORT', 3306);
+define('DB_NAME', 'tienda_db');
 define('DB_USER', 'root');
 define('DB_PASSWORD', 'secret-pass');
 
