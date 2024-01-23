@@ -8,7 +8,9 @@ services:
       - "./db:/docker-entrypoint-initdb.d"
       #- "./permanent_db:/var/lib/mysql"
   php:
-    image: php:apache
+    build:
+      context: .
+      dockerfile: Dockerfile
     volumes:
       - "./html:/var/www/html"
       - "./confs/docker-php.conf:/etc/apache2/conf-available/docker-php.conf"
