@@ -12,7 +12,7 @@ services:
       context: .
       dockerfile: Dockerfile
     volumes:
-      - "./html:/var/www/html"
+      - "./php-shop:/var/www/php-shop"
       - "./confs/docker-php.conf:/etc/apache2/conf-available/docker-php.conf"
     ports:
       - 8080:80

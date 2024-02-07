@@ -26,7 +26,8 @@ CREATE TABLE IF NOT EXISTS products (
     p_name VARCHAR(255),
     p_description TEXT,
     p_rating DECIMAL(3, 2),
-    stock INT
+    stock INT,
+    is_hidden BOOLEAN
 );
 
 -- Tabla imagenes
