@@ -34,3 +34,19 @@ function new_user($email, $name, $surname, $password, $conn) {
     }
     mysqli_stmt_close($stmt);
 } 
+
+# sin uso
+function get_user_id($email, $conn) {
+    $query = "SELECT user_id FROM users WHERE u_email='" . $email . "';";
+    $results = mysqli_query($conn, $query);
+    if ($results) {
+        $row = mysqli_fetch_assoc($results);
+        if ($row) {
+            return $row["user_id"];
+        } else {
+            return False;
+        }
+    }
+}
+
+
