@@ -1,4 +1,5 @@
 <div class="container">
+    <?php require '../views/view.error_bubble.php'; ?>
     <div class="row justify-content-center">
         <div class="col-lg-4 my-4 ">
             <form action="login.php" method="post">

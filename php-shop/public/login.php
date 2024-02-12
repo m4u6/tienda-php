@@ -19,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
     if ($errors) {
         # Hay errores y se los tenemos que enseñar al usuario
-        $_SESSION["login_errors"] = $errors;
+        $_SESSION["errors"] = $errors;
         if (is_email_taken($_POST["email"], $conn)) {
             add_log_entry("login.log", "Intento fallido de inicio de sesion en el usuario $email", 1);
         } else {
