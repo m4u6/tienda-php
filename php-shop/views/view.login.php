@@ -1,10 +1,10 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-lg-4 my-4 ">
-            <form action="signup.php" method="post">
+            <form action="login.php" method="post">
             <div class="mb-3">
                 <label for="email" name="email" class="form-label">Correo electrónico</label>
-                <input type="email" class="form-control" id="email" required>
+                <input type="email" name="email" class="form-control" id="email" required>
             </div>
             <div class="mb-3">
                 <label for="password" class="form-label">Contraseña:</label>
