@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     
-    
+    $email = $_POST["email"];
     if ($errors) {
         # Hay errores y se los tenemos que enseñar al usuario
         $_SESSION["errors"] = $errors;
