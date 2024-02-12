@@ -28,10 +28,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($errors) {
         # Hay errores y se los tenemos que enseñar al usuario
         $_SESSION["signup_errors"] = $errors;
-        echo "errores";
     } else {
-        # No hay errores y debemos crear el usuario y redirigirlo
-        echo "no errores";
+        # No hay errores. Debemos crear el usuario, loggearlo y redirigirlo
+        if (new_user($_POST["email"], $_POST["name"], $_POST["surname"], $_POST["password"], $conn)) {
+            header("Location: /index.php");
+        } else {
+            $errors["error_adding_user"] = "Error al crear el usuario";
+            $_SESSION["signup_errors"] = $errors;
+        }
     }
 
 
