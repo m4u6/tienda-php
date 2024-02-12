@@ -7,5 +7,5 @@ define('DB_USER', 'root');
 define('DB_PASSWORD', 'secret-pass');
 
 
-define('PASSWORD_SALT', 'aslkjdfha');
+define('PASSWORD_SALT', '72b302bf297a228a75730123efef7c41');
 ?>

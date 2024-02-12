@@ -27,7 +27,8 @@ CREATE TABLE IF NOT EXISTS products (
     p_description TEXT,
     p_rating DECIMAL(3, 2),
     stock INT,
-    is_hidden BOOLEAN
+    is_hidden BOOLEAN,
+    seo_name VARCHAR(255)
 );
 
 -- Tabla imagenes
@@ -48,6 +49,7 @@ CREATE TABLE IF NOT EXISTS categories (
     cat_description TEXT,
     cat_parent_id INT,
     img_id INT,
+    seo_name VARCHAR(255),
     FOREIGN KEY (cat_parent_id) REFERENCES categories(category_id),
     FOREIGN KEY (img_id) REFERENCES images(img_id)
 );
