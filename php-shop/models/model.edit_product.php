@@ -43,13 +43,13 @@ function is_valid_seo_name($seo_name, $conn) {
     }
 }
 
-function add_new_product($p_name, $p_description, $seo_name, $stock, $conn) {
+function add_new_product($p_name, $p_description, $seo_name, $stock, $price, $conn) {
     if (is_valid_seo_name($seo_name, $conn) == False) {
         return False;
     }
-    $sql = "INSERT INTO products (p_name, p_description, seo_name, stock) VALUES (?, ?, ?, ?);";
+    $sql = "INSERT INTO products (p_name, p_description, seo_name, stock, price) VALUES (?, ?, ?, ?, ?);";
     $stmt = mysqli_prepare($conn, $sql);
-    mysqli_stmt_bind_param($stmt, "sssi", $p_name, $p_description, $seo_name, $stock);
+    mysqli_stmt_bind_param($stmt, "sssid", $p_name, $p_description, $seo_name, $stock, $price);
     mysqli_stmt_execute($stmt);
 
     if (mysqli_stmt_error($stmt) === "") {

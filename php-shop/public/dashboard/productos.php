@@ -10,7 +10,7 @@ redirect_non_admin($conn);
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     # Hay que implementar control de errores (ej is_valid_seo_name())
     if ($_POST["edit"] == "new") {
-        add_new_product($_POST["p_name"], $_POST["p_description"], $_POST["seo_name"], $_POST["stock"], $conn);
+        add_new_product($_POST["p_name"], $_POST["p_description"], $_POST["seo_name"], $_POST["stock"], $_POST["price"], $conn);
     } else {
         update_product($_POST["edit"], $_POST["p_name"], $_POST["p_description"], $_POST["seo_name"], $_POST["stock"], $conn);
     }
@@ -29,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
                 # No se un producto nuevo y se esta intentando editar un producto que no existe
                 header("Location: productos.php?edit=new");
             }
-            $_SESSION["product_data"] = load_product_data($_GET["edit"], $conn);
+            $_SESSION["product_data"] = load_product_data($_GET["edit"], $conn);    # En algun momento hay que unsetear esto
         };
         require_once '../../views/dashboard/view.head.dashboard.php';
         require_once '../../views/dashboard/view.sidebar.dashboard.php';
@@ -51,7 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 
 
 require_once '../../views/dashboard/view.tail.dashboard.php';
-
+unset($_SESSION["product_data"]);
 
 
 
