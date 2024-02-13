@@ -25,6 +25,7 @@ CREATE TABLE IF NOT EXISTS products (
     product_id INT AUTO_INCREMENT PRIMARY KEY,
     p_name VARCHAR(255),
     p_description TEXT,
+    price DECIMAL(10, 2),
     p_rating DECIMAL(3, 2),
     stock INT,
     is_hidden BOOLEAN,

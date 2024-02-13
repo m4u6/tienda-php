@@ -21,7 +21,32 @@ function load_product_data($product_id, $conn) {
     }
 }
 
+function is_valid_seo_name($seo_name, $conn) {
+    # Primero comprbar si no tiene espacios u otros caracteres prohibidos
+    # Luego comprobar que no exista otro seo_name igual en la db
+    # Solo se permiten numeros y letras ([\w]) y guiones sueltos pero no al principio ni al final
+    if (preg_match('/^([\w]+-?[\w]+)*$/', $seo_name) === 1) {
+        $query = "SELECT seo_name FROM products WHERE seo_name='" . $seo_name . "';";
+        $results = mysqli_query($conn, $query);
+        if ($results) {
+            $row = mysqli_fetch_assoc($results);
+            if ($row) {
+                # Hay resultados y por tanto no es un seo_name valido
+                return False;
+            } else {
+                # No hay resultados por lo que el seo_name es unico
+                return True;
+            }
+        }
+    } else {
+        return False;
+    }
+}
+
 function add_new_product($p_name, $p_description, $seo_name, $stock, $conn) {
+    if (is_valid_seo_name($seo_name, $conn) == False) {
+        return False;
+    }
     $sql = "INSERT INTO products (p_name, p_description, seo_name, stock) VALUES (?, ?, ?, ?);";
     $stmt = mysqli_prepare($conn, $sql);
     mysqli_stmt_bind_param($stmt, "sssi", $p_name, $p_description, $seo_name, $stock);
@@ -42,13 +67,26 @@ function add_new_product($p_name, $p_description, $seo_name, $stock, $conn) {
 
 
 function is_valid_product_id($product_id, $conn) {
+    # Comprueba que el id solo contiene numeros
+    if (!(preg_match('/^[\d]+$/', $product_id) === 1)) {
+        return False;
+    }
     # Comprueba si existe ese product_id dentro de la base de datos
+    $query = "SELECT product_id FROM products WHERE product_id=" . $product_id . ";";
+    $results = mysqli_query($conn, $query);
+    if ($results) {
+        $row = mysqli_fetch_assoc($results);
+        if ($row) {
+            # Hay resultados y por tanto no es un $product_id
+            return False;
+        } else {
+            # No hay resultados por lo que el $product_id es unico
+            return True;
+        }
+    }
 }
 
-function is_valid_seo_name($seo_name, $conn) {
-    # Primero comprbar si no tiene espacios u otros caracteres prohibidos
-    # Luego comprobar que no exista otro seo_name igual en la db
-}
+
 
 
 function update_product($product_id, $p_name, $p_description, $seo_name, $stock, $conn) {
