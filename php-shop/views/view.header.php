@@ -35,6 +35,7 @@
                         </li>
                         <li class="nav-item"><a class="nav-link" href="/login.php">Login</a></li>
                         <li class="nav-item"><a class="nav-link" href="/signup.php">Registrarse</a></li>
+                        <?php echo admin_check($conn) ? "<li class=\"nav-item\"><a class=\"nav-link\" href=\"/dashboard/\">Dashboard</a></li>" : "" ?>
                     </ul>
                     <form class="d-flex">
                         <button class="btn btn-outline-dark" type="submit">

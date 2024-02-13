@@ -2,3 +2,9 @@ Monday, 12-Feb-24 22:15:31 UTC ERROR 1: Se ha intentado iniciar sesion con un co
 Monday, 12-Feb-24 22:16:07 UTC ERROR 1: Se ha intentado iniciar sesion con un correo que no esta registrado ()
 Monday, 12-Feb-24 22:16:15 UTC : El usuario  ha iniciado sesión
 Monday, 12-Feb-24 22:17:02 UTC : El usuario  ha iniciado sesión
+Monday, 12-Feb-24 22:22:50 UTC ERROR 1: Se ha intentado iniciar sesion con un correo que no esta registrado ()
+Monday, 12-Feb-24 22:38:45 UTC ERROR 1: Intento fallido de inicio de sesion en el usuario asdasd@gmail.com
+Monday, 12-Feb-24 22:39:15 UTC ERROR 1: Se ha intentado iniciar sesion con un correo que no esta registrado (noexisteo@sfgd.com)
+Tuesday, 13-Feb-24 10:52:41 UTC : El usuario admin@admin.com ha iniciado sesión
+Tuesday, 13-Feb-24 12:13:12 UTC : El usuario admin@admin.com ha iniciado sesión
+Tuesday, 13-Feb-24 12:29:08 UTC : El usuario admin@admin.com ha iniciado sesión
