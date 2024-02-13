@@ -67,24 +67,28 @@ function add_new_product($p_name, $p_description, $seo_name, $stock, $conn) {
 
 
 function is_valid_product_id($product_id, $conn) {
+    # Debera devolver true si es un product_id que existe y false si no.
     # Comprueba que el id solo contiene numeros
     if (!(preg_match('/^[\d]+$/', $product_id) === 1)) {
         return False;
     }
-    # Comprueba si existe ese product_id dentro de la base de datos
-    $query = "SELECT product_id FROM products WHERE product_id=" . $product_id . ";";
-    $results = mysqli_query($conn, $query);
-    if ($results) {
-        $row = mysqli_fetch_assoc($results);
-        if ($row) {
-            # Hay resultados y por tanto no es un $product_id
-            return False;
-        } else {
-            # No hay resultados por lo que el $product_id es unico
-            return True;
-        }
+    # Comprobamos si este product_id existe en la base de datos
+    $query = "SELECT product_id FROM products WHERE product_id=?";
+    $stmt = mysqli_prepare($conn, $query);
+    mysqli_stmt_bind_param($stmt, "i", $product_id);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+    
+    # Si hay mas de 0 lineas entonces existe
+    if ($result && mysqli_num_rows($result) > 0) {
+        # Existe
+        return True;
+    } else {
+        # No existe
+        return False;
     }
 }
+
 
 
 
