@@ -32,3 +32,11 @@ function password_check($email, $password, $conn) {
         }
     }
 }
+
+function is_logged($conn) {
+    if ($_SESSION["logged_as"]) {
+        return True;
+    } else {
+        return False;
+    }
+}

@@ -4,6 +4,7 @@ require_once '../config/db.php';
 session_start();
 
 require_once '../models/model.dashboard.php';
+require_once '../models/model.login.php';
 define('PAGE_TITLE', 'Index');
 require_once '../views/view.header.php';
 
