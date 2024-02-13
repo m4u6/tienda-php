@@ -26,7 +26,7 @@ require_once '../../views/dashboard/view.top_navbar.dashboard.php';
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     if (isset($_GET["edit"])) {
         if ($_GET["edit"] != "new") {
-            $_SESSION["product_data"] = load_product_data($product_id, $conn);
+            $_SESSION["product_data"] = load_product_data($_GET["edit"], $conn);
         };
         require_once '../../views/dashboard/view.edit_product.dashboard.php';
     } elseif (isset($_GET["view"])) {

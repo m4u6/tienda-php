@@ -9,7 +9,7 @@ function new_or_edit_product($get_edit, $conn) {
 }
 
 function load_product_data($product_id, $conn) {
-    $query = "SELECT * FROM products WHERE product_id='" . $product_id . "';";
+    $query = "SELECT * FROM products WHERE product_id=" . $product_id . ";";
     $results = mysqli_query($conn, $query);
     if ($results) {
         $row = mysqli_fetch_assoc($results);
@@ -41,7 +41,18 @@ function add_new_product($p_name, $p_description, $seo_name, $stock, $conn) {
 }
 
 
+function is_valid_product_id($product_id, $conn) {
+    # Comprueba si existe ese product_id dentro de la base de datos
+}
+
+function is_valid_seo_name($seo_name, $conn) {
+    # Primero comprbar si no tiene espacios u otros caracteres prohibidos
+    # Luego comprobar que no exista otro seo_name igual en la db
+}
 
 
+function update_product($product_id, $p_name, $p_description, $seo_name, $stock, $conn) {
+    # Si is_valid_product_id() == False entonces no hacemos nada y damos error
+}
 
 
