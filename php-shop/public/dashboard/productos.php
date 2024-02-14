@@ -7,6 +7,9 @@ require_once '../../models/model.dashboard.php';
 require_once '../../models/model.edit_product.php';
 require_once '../../models/model.products.php';
 redirect_non_admin($conn);
+require_once '../../views/view.f.sortable_table.php';   # importamos aqui este archivo view por que contiene funciones
+
+
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     # Hay que implementar control de errores (ej is_valid_seo_name())
@@ -43,9 +46,7 @@ if (isset($_GET["edit"])) {
     require_once '../../views/dashboard/view.head.dashboard.php';
     require_once '../../views/dashboard/view.sidebar.dashboard.php';
     require_once '../../views/dashboard/view.top_navbar.dashboard.php';
-    require_once '../../views/view.f.sortable_table.php';
     require_once '../../views/dashboard/view.products.dashboard.php';
-    
 }
 
 

@@ -1,6 +1,6 @@
 <?php
 
-$query1 = array(
+$query_productos = array(
     # columna => as alias 
     "product_id" => "ID",
     "p_name" => "Nombre",
@@ -35,4 +35,14 @@ function query_products($conn, $columns=NULL) {
         # Error
         echo "Error: " . mysqli_error($conn);
     }
+}
+
+function add_edit_product_to_table($data) {
+    for ($i = 1; $i <= count($data); $i++) {
+        #$edit_array = array("Edit" => "<a href=\"productos.php?edit=$data[$i][\"ID\"]\">Editar producto</a>");
+        $product_id=$data[$i]["ID"];
+        $data[$i]["Edit"] = "<a href=\"productos.php?edit=$product_id\">Editar producto</a>";
+        
+    }
+    return $data;
 }
