@@ -15,7 +15,8 @@ CREATE TABLE IF NOT EXISTS users (
     u_address VARCHAR(255),
     default_address VARCHAR(255),
     billing_address VARCHAR(255),
-    is_admin BOOLEAN
+    is_admin BOOLEAN,
+    date_created TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 
@@ -29,7 +30,8 @@ CREATE TABLE IF NOT EXISTS products (
     p_rating DECIMAL(3, 2),
     stock INT,
     is_hidden BOOLEAN,
-    seo_name VARCHAR(255)
+    seo_name VARCHAR(255),
+    date_added TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 -- Tabla imagenes
@@ -123,6 +125,7 @@ CREATE TABLE IF NOT EXISTS ratings (         -- igual habria que añadir un camp
     rating DECIMAL(3, 2),
     comment TEXT,
     responds_to INT,
+    date_posted TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (user_id) REFERENCES users(user_id),
     FOREIGN KEY (product_id) REFERENCES products(product_id),
     FOREIGN KEY (responds_to) REFERENCES ratings(comment_id)
@@ -158,6 +161,7 @@ CREATE TABLE IF NOT EXISTS support_msgs (
     user_id INT,
     msg_title VARCHAR(255),
     msg_body TEXT,
+    date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (product_id) REFERENCES products(product_id),
     FOREIGN KEY (order_id) REFERENCES orders(order_id),
     FOREIGN KEY (user_id) REFERENCES users(user_id)

@@ -11,3 +11,5 @@ Tuesday, 13-Feb-24 12:29:08 UTC : El usuario admin@admin.com ha iniciado sesión
 Tuesday, 13-Feb-24 12:40:14 UTC : El usuario admin@admin.com ha iniciado sesión
 Tuesday, 13-Feb-24 12:43:36 UTC : El usuario admin@admin.com ha iniciado sesión
 Tuesday, 13-Feb-24 21:14:43 UTC ERROR 1: Se ha intentado iniciar sesion con un correo que no esta registrado (admin@admin.com)
+Wednesday, 14-Feb-24 21:06:28 UTC : El usuario admin@admin.com ha iniciado sesión
+Wednesday, 14-Feb-24 21:06:56 UTC ERROR 1: Se ha intentado iniciar sesion con un correo que no esta registrado (admin@admin.com)

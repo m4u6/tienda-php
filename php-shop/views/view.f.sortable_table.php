@@ -13,7 +13,7 @@ function sortable_table($data, $no_sort_array) {
     <?php
     foreach ($data[1] as $col_name => $value) {
         ?>
-        <th  <?php
+        <th <?php
             $classes = "";
             if (in_array($col_name, $no_sort_array)) {
                 $classes .= "no-sort ";
@@ -22,8 +22,8 @@ function sortable_table($data, $no_sort_array) {
                 $classes .= "num ";
             }
             if ($classes != "") {
-                echo "class=\"$classes\"";
-            }?>>
+                echo "class=\"$classes\">";
+            }?>
           <button>
             <?php echo $col_name ?>
             <span aria-hidden="true"></span>
