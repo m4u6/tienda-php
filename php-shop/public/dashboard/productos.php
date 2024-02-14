@@ -5,6 +5,7 @@ session_start();
 define('PAGE_TITLE', 'Productos');
 require_once '../../models/model.dashboard.php';
 require_once '../../models/model.edit_product.php';
+require_once '../../models/model.products.php';
 redirect_non_admin($conn);
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -38,6 +39,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         require_once '../../views/dashboard/view.edit_product.dashboard.php';
     } elseif (isset($_GET["view"])) {
         echo "s";
+    } else {
+        require_once '../../views/dashboard/view.head.dashboard.php';
+        require_once '../../views/dashboard/view.sidebar.dashboard.php';
+        require_once '../../views/dashboard/view.top_navbar.dashboard.php';
+        require_once '../../views/dashboard/view.products.dashboard.php';
+
     }
 }
 
