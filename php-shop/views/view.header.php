@@ -13,6 +13,7 @@
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="css/styles.css" rel="stylesheet" />
         <link href="css/main.css" rel="stylesheet" />
+        <link href="css/sortable-table.css" rel="stylesheet" />
     </head>
     <body>
         <!-- Navigation-->
