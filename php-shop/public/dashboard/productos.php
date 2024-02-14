@@ -23,30 +23,31 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 
 
-if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-    if (isset($_GET["edit"])) {
-        if ($_GET["edit"] != "new" ) {  # and is_valid_product_id()
-            if (is_valid_product_id($_GET["edit"], $conn) === False) {
-                # No se un producto nuevo y se esta intentando editar un producto que no existe
-                header("Location: productos.php?edit=new");
-            }
-            $_SESSION["product_data"] = load_product_data($_GET["edit"], $conn);    # En algun momento hay que unsetear esto
-        };
-        require_once '../../views/dashboard/view.head.dashboard.php';
-        require_once '../../views/dashboard/view.sidebar.dashboard.php';
-        require_once '../../views/dashboard/view.top_navbar.dashboard.php';
-        # Actual content of the page
-        require_once '../../views/dashboard/view.edit_product.dashboard.php';
-    } elseif (isset($_GET["view"])) {
-        echo "s";
-    } else {
-        require_once '../../views/dashboard/view.head.dashboard.php';
-        require_once '../../views/dashboard/view.sidebar.dashboard.php';
-        require_once '../../views/dashboard/view.top_navbar.dashboard.php';
-        require_once '../../views/dashboard/view.products.dashboard.php';
 
-    }
+if (isset($_GET["edit"])) {
+    if ($_GET["edit"] != "new" ) {  # and is_valid_product_id()
+        if (is_valid_product_id($_GET["edit"], $conn) === False) {
+            # No se un producto nuevo y se esta intentando editar un producto que no existe
+            header("Location: productos.php?edit=new");
+        }
+        $_SESSION["product_data"] = load_product_data($_GET["edit"], $conn);    # En algun momento hay que unsetear esto
+    };
+    require_once '../../views/dashboard/view.head.dashboard.php';
+    require_once '../../views/dashboard/view.sidebar.dashboard.php';
+    require_once '../../views/dashboard/view.top_navbar.dashboard.php';
+    # Actual content of the page
+    require_once '../../views/dashboard/view.edit_product.dashboard.php';
+} elseif (isset($_GET["view"])) {
+    echo "s";
+} else {
+    require_once '../../views/dashboard/view.head.dashboard.php';
+    require_once '../../views/dashboard/view.sidebar.dashboard.php';
+    require_once '../../views/dashboard/view.top_navbar.dashboard.php';
+    require_once '../../views/view.f.sortable_table.php';
+    require_once '../../views/dashboard/view.products.dashboard.php';
+    
 }
+
 
 
 
