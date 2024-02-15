@@ -31,9 +31,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
     if ($errors) {
         # cargamos los datos de producto manualmente en la sesion y los volvemos a mandar al editor de producto
-        # $_SESSION["product_data"]
+        $_SESSION["product_data"] = array(
+            "p_name" => $_POST["p_name"],
+            "p_description" => $_POST["p_description"],
+            "seo_name" => $_POST["seo_name"],
+            "stock" => $_POST["stock"],
+            "price" => $_POST["price"]
+        );
         $_SESSION["errors"] = $errors;
         header("Location: productos.php?edit=" . $_POST["edit"]);
+        die();
 
     }
 
@@ -50,7 +57,7 @@ if (isset($_GET["edit"])) {
         if (is_valid_product_id($_GET["edit"], $conn) === False) {
             # No es un producto nuevo y se esta intentando editar un producto que no existe
             header("Location: productos.php?edit=new");
-            # añadir die() ?
+            die();
         }
         if (!isset($_SESSION["product_data"])) {
             $_SESSION["product_data"] = load_product_data($_GET["edit"], $conn);    # En algun momento hay que unsetear esto
