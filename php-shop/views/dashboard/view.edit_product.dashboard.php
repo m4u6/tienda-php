@@ -2,6 +2,7 @@
 <div class="container-fluid">
     <?php var_dump($_SESSION["product_data"]) ?>
     <h2>Editor de productos</h2>
+    <?php require '../../views/view.error_bubble.php'; ?>
     <form action="productos.php" method="post" class="py-3" >
         <input type="hidden" name="edit" value="<?php echo $_GET["edit"]?>">    <!--- Con esto luego al procesar el formulario podemos saber que hacer --->
         <div class="form-group">

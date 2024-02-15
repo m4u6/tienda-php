@@ -31,6 +31,7 @@ CREATE TABLE IF NOT EXISTS products (
     stock INT,
     is_hidden BOOLEAN,
     seo_name VARCHAR(255),
+    default_img_id INT,
     date_added TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 

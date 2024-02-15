@@ -12,12 +12,29 @@ require_once '../../views/view.f.sortable_table.php';   # importamos aqui este a
 
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $errors = [];
     # Hay que implementar control de errores (ej is_valid_seo_name())
-    if ($_POST["edit"] == "new") {
-        add_new_product($_POST["p_name"], $_POST["p_description"], $_POST["seo_name"], $_POST["stock"], $_POST["price"], $conn);
-        # Igual habria que poner aqui un try catch
+    if ($_POST["edit"] == "new" && ! $errors) {
+        try {
+            add_new_product($_POST["p_name"], $_POST["p_description"], $_POST["seo_name"], $_POST["stock"], $_POST["price"], $conn);
+        } catch (Exception $e) {
+            $errors["error_new_product"] = $e->getMessage();
+        }
     } else {
-        update_product($_POST["edit"], $_POST["p_name"], $_POST["p_description"], $_POST["seo_name"], $_POST["stock"], $_POST["price"], $conn);
+        if (!$errors) {
+            try {
+                update_product($_POST["edit"], $_POST["p_name"], $_POST["p_description"], $_POST["seo_name"], $_POST["stock"], $_POST["price"], $conn);
+            } catch (Exception $e) {
+                $errors["error_update_product"] = $e->getMessage();
+            }
+        }
+    }
+    if ($errors) {
+        # cargamos los datos de producto manualmente en la sesion y los volvemos a mandar al editor de producto
+        # $_SESSION["product_data"]
+        $_SESSION["errors"] = $errors;
+        header("Location: productos.php?edit=" . $_POST["edit"]);
+
     }
 
 }
@@ -33,8 +50,11 @@ if (isset($_GET["edit"])) {
         if (is_valid_product_id($_GET["edit"], $conn) === False) {
             # No es un producto nuevo y se esta intentando editar un producto que no existe
             header("Location: productos.php?edit=new");
+            # añadir die() ?
         }
-        $_SESSION["product_data"] = load_product_data($_GET["edit"], $conn);    # En algun momento hay que unsetear esto
+        if (!isset($_SESSION["product_data"])) {
+            $_SESSION["product_data"] = load_product_data($_GET["edit"], $conn);    # En algun momento hay que unsetear esto
+        }
     };
     require_once '../../views/dashboard/view.head.dashboard.php';
     require_once '../../views/dashboard/view.sidebar.dashboard.php';

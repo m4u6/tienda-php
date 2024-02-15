@@ -44,7 +44,7 @@ function is_valid_seo_name($seo_name, $conn, $product_id=0) {
 
 function add_new_product($p_name, $p_description, $seo_name, $stock, $price, $conn) {
     if (is_valid_seo_name($seo_name, $conn) == False) {
-        return False;
+        throw new Exception("seo-name invalido");
     }
     $sql = "INSERT INTO products (p_name, p_description, seo_name, stock, price) VALUES (?, ?, ?, ?, ?);";
     $stmt = mysqli_prepare($conn, $sql);
@@ -58,8 +58,8 @@ function add_new_product($p_name, $p_description, $seo_name, $stock, $price, $co
     } else {
         # Hay errores
         $error = mysqli_stmt_error($stmt);
-        add_log_entry("products.log", "Error al crear producto $p_name", 1);
-        return False;
+        add_log_entry("products.log", "Error al crear producto $p_name = $error", 1);
+        throw new Exception("Hubo un error creando el producto");
     }
     mysqli_stmt_close($stmt);
 }
@@ -98,12 +98,11 @@ function update_product($product_id, $p_name, $p_description, $seo_name, $stock,
     // Validate SEO name
     
     if (is_valid_seo_name($seo_name, $conn, $product_id) === False) {
-        echo "invalid seo? $seo_name";
-        return false;
+        throw new Exception("seo-name invalido");
     }
     $sql = "UPDATE products SET p_name=?, p_description=?, seo_name=?, stock=?, price=? WHERE product_id=?";
     $stmt = mysqli_prepare($conn, $sql);
-    mysqli_stmt_bind_param($stmt, "sssidi", $p_name, $p_description, $seo_name, $stock, $price, $product_id);    #line 107
+    mysqli_stmt_bind_param($stmt, "sssidi", $p_name, $p_description, $seo_name, $stock, $price, $product_id);
     mysqli_stmt_execute($stmt);
 
     if (mysqli_stmt_error($stmt) === "") {
@@ -114,9 +113,9 @@ function update_product($product_id, $p_name, $p_description, $seo_name, $stock,
     } else {
         # Hay errores
         $error = mysqli_stmt_error($stmt);
-        add_log_entry("products.log", "Error al actualizar el producto $p_name", 1);
+        add_log_entry("products.log", "Error al actualizar el producto $p_name = $error", 1);
         mysqli_stmt_close($stmt);
-        return false;
+        throw new Exception("Hubo un error actualizando el producto");
     }
 }
 
