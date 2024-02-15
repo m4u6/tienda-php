@@ -15,6 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     # Hay que implementar control de errores (ej is_valid_seo_name())
     if ($_POST["edit"] == "new") {
         add_new_product($_POST["p_name"], $_POST["p_description"], $_POST["seo_name"], $_POST["stock"], $_POST["price"], $conn);
+        # Igual habria que poner aqui un try catch
     } else {
         update_product($_POST["edit"], $_POST["p_name"], $_POST["p_description"], $_POST["seo_name"], $_POST["stock"], $_POST["price"], $conn);
     }
@@ -30,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 if (isset($_GET["edit"])) {
     if ($_GET["edit"] != "new" ) {  # and is_valid_product_id()
         if (is_valid_product_id($_GET["edit"], $conn) === False) {
-            # No se un producto nuevo y se esta intentando editar un producto que no existe
+            # No es un producto nuevo y se esta intentando editar un producto que no existe
             header("Location: productos.php?edit=new");
         }
         $_SESSION["product_data"] = load_product_data($_GET["edit"], $conn);    # En algun momento hay que unsetear esto
