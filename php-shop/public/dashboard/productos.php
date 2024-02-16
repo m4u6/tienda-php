@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     # Hay que implementar control de errores (ej is_valid_seo_name()), mirar que no todos los campos esten vacios, ademas del control de las imagenes
     if (isset($_FILES["img"])) {
         #var_dump($_FILES["img"]);
-        handle_upload($_FILES["img"], $errors, $_POST["edit"]); # Importante la carpeta ../assets/img debe tener permisos apropiados!!
+        handle_upload($_FILES["img"], $errors, $_POST["edit"], $conn); # Importante la carpeta ../assets/img debe tener permisos apropiados!!
     }
     
 

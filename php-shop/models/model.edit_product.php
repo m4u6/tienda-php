@@ -138,7 +138,7 @@ function reArrayFiles(&$file_post) {
 
 
 
-function handle_upload($files, &$errors, $product_id) {
+function handle_upload($files, &$errors, $product_id, $conn) {
     for ($i=0;$i<count($files["name"]);$i++) {
         $name=$files["name"][$i];
         $type=$files["type"][$i];
@@ -163,16 +163,29 @@ function handle_upload($files, &$errors, $product_id) {
         }
 
         # A partir de aqui las imagenes que lleguen seran validas
-        $file_save_name=uniqid('', true). "." . $product_id . "." . $extension;
+        $file_save_name=uniqid('', true) . "-" . $product_id . "." . $extension;
         $file_destination="../assets/img/" . $file_save_name;
         move_uploaded_file($tmp_name, $file_destination);
-        # Falta por hacer la entrada a la base de datos
+
+        # Añadimos la imagen en la base de datos
+        $absolute_img_path=substr($file_destination, 2);
+        $sql = "INSERT INTO images (product_id, img_location) VALUES (?, ?);";
+        $stmt = mysqli_prepare($conn, $sql);
+        mysqli_stmt_bind_param($stmt, "is", $product_id, $absolute_img_path);
+        mysqli_stmt_execute($stmt);
+    
+        if (mysqli_stmt_error($stmt) === "") {
+            # No hay errores
+            add_log_entry("products.log", "Imagen $name subida al producto id:$product_id");
+            return True;
+        } else {
+            # Hay errores
+            $error = mysqli_stmt_error($stmt);
+            add_log_entry("products.log", "Error al añadir imagen al producto", 1);
+        }
+        mysqli_stmt_close($stmt);
     }
 } 
 
 
 
-
-function process_img_upload($files_array) {
-
-}
