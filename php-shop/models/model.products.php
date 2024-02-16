@@ -46,3 +46,26 @@ function add_edit_product_to_table($data) {
     }
     return $data;
 }
+
+
+
+function get_product_data_imgs($conn, $product_id) {
+    $query = "SELECT * FROM products WHERE product_id=" . $product_id . ";";
+    $results = mysqli_query($conn, $query);
+    if ($results) {
+        $producto = mysqli_fetch_assoc($results);
+        if ($producto) {
+            mysqli_free_result($results);
+            $query = "SELECT img_location FROM images WHERE product_id=" . $product_id . ";";
+            $results = mysqli_query($conn, $query);
+            $image_locations = array();
+            while ($row = mysqli_fetch_assoc($results)) {
+                $image_locations[] = $row['img_location'];
+            }
+            $producto["imgs"]=$image_locations;
+            return $producto;
+        } else {
+            return False;
+        }
+    }
+}

@@ -12,7 +12,7 @@ define('PASSWORD_SALT', '72b302bf297a228a75730123efef7c41');
 
 define('MAX_IMG_SIZE', 2097152); # En php.ini esta configurado como 2MB.
 define('ALLOWED_IMG_EXTENSIONS', ['jpg', 'jpeg', 'png', 'gif']);
-
+define('CURRENCY_SYMBOL', '€');
 
 
 

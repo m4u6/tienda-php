@@ -8,7 +8,7 @@ require_once '../../models/model.edit_product.php';
 require_once '../../models/model.products.php';
 redirect_non_admin($conn);
 require_once '../../views/view.f.sortable_table.php';   # importamos aqui este archivo view por que contiene funciones
-
+require_once '../../views/view.f.product_presentation.php';
 
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
