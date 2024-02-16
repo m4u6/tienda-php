@@ -120,3 +120,59 @@ function update_product($product_id, $p_name, $p_description, $seo_name, $stock,
 }
 
 
+function reArrayFiles(&$file_post) {
+    # Esta funcion reorganiza la variable $_FILES para que tenga una estructura mas intuitiva. 
+    # Sacada de php.net por phpuser at gmail dot com    src: https://www.php.net/manual/en/features.file-upload.multiple.php
+    $file_ary = array();
+    $file_count = count($file_post['name']);    # line 127
+    $file_keys = array_keys($file_post);
+
+    for ($i=0; $i<$file_count; $i++) {
+        foreach ($file_keys as $key) {
+            $file_ary[$i][$key] = $file_post[$key][$i];
+        }
+    }
+
+    return $file_ary;
+}
+
+
+
+function handle_upload($files, &$errors, $product_id) {
+    for ($i=0;$i<count($files["name"]);$i++) {
+        $name=$files["name"][$i];
+        $type=$files["type"][$i];
+        $tmp_name=$files["tmp_name"][$i];
+        $img_error=$files["error"][$i];
+        $size=$files["size"][$i];
+        $extension=strtolower(end(explode('.',$name)));
+        
+        # Error handling
+        $error_count=count($errors);
+        if ($size > MAX_IMG_SIZE) {
+            $errors["too_large_img".$i]="Error, la imagen $name es muy grande.";
+        }
+        if ($img_error === 1) {
+            $errors["unknown_error_img".$i]="Error subiendo la imagen $i";
+        } 
+        if (in_array($extension, ALLOWED_IMG_EXTENSIONS) == false) {
+            $errors["ext_not_allowed".$i]="No se permite este tipo de ficheros $name";
+        }
+        if ($error_count != count($errors)) {
+            continue;
+        }
+
+        # A partir de aqui las imagenes que lleguen seran validas
+        $file_save_name=uniqid('', true). "." . $product_id . "." . $extension;
+        $file_destination="../assets/img/" . $file_save_name;
+        move_uploaded_file($tmp_name, $file_destination);
+        # Falta por hacer la entrada a la base de datos
+    }
+} 
+
+
+
+
+function process_img_upload($files_array) {
+
+}

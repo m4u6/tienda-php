@@ -13,7 +13,16 @@ require_once '../../views/view.f.sortable_table.php';   # importamos aqui este a
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $errors = [];
-    # Hay que implementar control de errores (ej is_valid_seo_name())
+    # Hay que implementar control de errores (ej is_valid_seo_name()), mirar que no todos los campos esten vacios, ademas del control de las imagenes
+    if (isset($_FILES["img"])) {
+        #var_dump($_FILES["img"]);
+        handle_upload($_FILES["img"], $errors, $_POST["edit"]); # Importante la carpeta ../assets/img debe tener permisos apropiados!!
+    }
+    
+
+
+
+
     if ($_POST["edit"] == "new" && ! $errors) {
         try {
             add_new_product($_POST["p_name"], $_POST["p_description"], $_POST["seo_name"], $_POST["stock"], $_POST["price"], $conn);
@@ -32,6 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($errors) {
         # cargamos los datos de producto manualmente en la sesion y los volvemos a mandar al editor de producto
         $_SESSION["product_data"] = array(
+            "product_id" => $_POST["edit"],
             "p_name" => $_POST["p_name"],
             "p_description" => $_POST["p_description"],
             "seo_name" => $_POST["seo_name"],

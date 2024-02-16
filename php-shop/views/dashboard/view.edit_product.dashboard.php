@@ -3,7 +3,7 @@
     <?php var_dump($_SESSION["product_data"]) ?>
     <h2>Editor de productos</h2>
     <?php require '../../views/view.error_bubble.php'; ?>
-    <form action="productos.php" method="post" class="py-3" >
+    <form action="productos.php" method="post" enctype="multipart/form-data" class="py-3" >
         <input type="hidden" name="edit" value="<?php echo $_GET["edit"]?>">    <!--- Con esto luego al procesar el formulario podemos saber que hacer --->
         <div class="form-group">
             <label for="p_name">Nombre de producto:</label>
@@ -18,9 +18,11 @@
             <input type="number" step=1 min=0 name="stock" id="stock" value="<?php echo isset($_SESSION["product_data"]["stock"]) ? $_SESSION["product_data"]["stock"] : ""   ?>">
             <label for="price">Precio:</label>
             <input type="number" step=0.01 min=0 name="price" id="price" value="<?php echo isset($_SESSION["product_data"]["price"]) ? $_SESSION["product_data"]["price"] : ""   ?>">
-            
+        </div>
+        <div class="form-group py-3">
+            <label for="imgs"><b>Subir imagenes: </b></label>
+            <input id="imgs" name="img[]" type="file" multiple="multiple"/>
         </div>
         <input type="submit" class="btn btn-primary" value="Guardar">
-
     </form>
 </div>
