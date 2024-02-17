@@ -18,7 +18,7 @@
                     <div class="col mb-5">
                     
      
-    <?php product_card($conn, 1) ?>
+    <?php product_card($conn, 3) ?>
 
     </div>
                     </div>
