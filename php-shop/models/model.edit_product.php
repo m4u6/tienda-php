@@ -119,7 +119,7 @@ function update_product($product_id, $p_name, $p_description, $seo_name, $stock,
     }
 }
 
-
+# Creo que no se usa al final
 function reArrayFiles(&$file_post) {
     # Esta funcion reorganiza la variable $_FILES para que tenga una estructura mas intuitiva. 
     # Sacada de php.net por phpuser at gmail dot com    src: https://www.php.net/manual/en/features.file-upload.multiple.php

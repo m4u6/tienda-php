@@ -51,7 +51,7 @@ function add_view_product_to_table($data) {
     for ($i = 1; $i <= count($data); $i++) {
         #$edit_array = array("Edit" => "<a href=\"productos.php?edit=$data[$i][\"ID\"]\">Editar producto</a>");
         $seo_name=$data[$i]["URL Amigable"];
-        $data[$i]["Ver en tienda"] = "<a href=\"/productos/$seo_name\">Ver página</a>";
+        $data[$i]["Ver en tienda"] = "<a href=\"/producto/$seo_name\">Ver página</a>";
         
     }
     return $data;
@@ -77,5 +77,23 @@ function get_product_data_imgs($conn, $product_id) {
         } else {
             return False;
         }
+    }
+}
+
+
+
+function seo_name_to_id($conn, $seo_name) {
+    $sql = "SELECT product_id FROM products WHERE seo_name = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("s", $seo_name);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        return $row['product_id'];
+    } else {
+        # Si el producto no existe lanzamos una excepcion
+        throw new Exception("Ese producto no existe");
     }
 }

@@ -16,7 +16,7 @@ function product_card($conn, $product_id) {
         </div>
         <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
             <div class="text-center">
-                <a class="btn btn-outline-dark mt-auto" href="/productos/<?=$data["seo_name"]?>">Ver más</a>
+                <a class="btn btn-outline-dark mt-auto" href="/producto/<?=$data["seo_name"]?>">Ver más</a>
             </div>
         </div>
     </div>
