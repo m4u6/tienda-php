@@ -5,6 +5,7 @@ function product_card($conn, $product_id) {
         return false;
     }
     ?>
+    <div class="col mb-5">
     <div class="card h-100">
         <img class="card-img-top" src="<?=$data["imgs"][0]?>" alt="Product Image" style="object-fit: cover; height: 200px;">
         <div class="card-body p-4">
@@ -19,7 +20,21 @@ function product_card($conn, $product_id) {
             </div>
         </div>
     </div>
+    </div>
     <?php
 }
-?>
+
+
+function render_product_listings($conn, $product_id_array) {
+    # Esta funcion espera un array de product_id. Usara la fuincion product_card() para crear cada una de las tarjetas
+    echo "<section class=\"py-5\">\n";
+    echo "<div class=\"container px-4 px-lg-5 my-5\">\n";
+    echo "<div class=\"row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center\">\n";
+    foreach ($product_id_array as $product_id) {
+        product_card($conn, $product_id);
+    }
+    echo "</div>\n";
+    echo "</div>\n";
+    echo "</section>\n";
+}
 

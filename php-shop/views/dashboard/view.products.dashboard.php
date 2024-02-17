@@ -5,25 +5,16 @@
         <div class="col-2 pt-3"><a href="?edit=new" class="btn btn-primary">Nuevo producto</a></div>
     </div>
     <?php 
-    $data = add_edit_product_to_table(query_products($conn, $query_productos));
+    # Preparando los datos para mostrar en la tabla
+    $data = query_products($conn, $query_productos);
+    $data = add_view_product_to_table($data);
+    $data = add_edit_product_to_table($data);
+    
 
-
-
+    # Tabla
     sortable_table($data, $no_sort_array);
     
-    ?>
-    <section class="py-5">
-            <div class="container px-4 px-lg-5 mt-5">
-                <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-                    <div class="col mb-5">
-                    
-     
-    <?php product_card($conn, 3) ?>
-
-    </div>
-                    </div>
-                </div>
-        </section>
+?>
     
 </div>
 

@@ -47,6 +47,16 @@ function add_edit_product_to_table($data) {
     return $data;
 }
 
+function add_view_product_to_table($data) {
+    for ($i = 1; $i <= count($data); $i++) {
+        #$edit_array = array("Edit" => "<a href=\"productos.php?edit=$data[$i][\"ID\"]\">Editar producto</a>");
+        $seo_name=$data[$i]["URL Amigable"];
+        $data[$i]["Ver en tienda"] = "<a href=\"/productos/$seo_name\">Ver página</a>";
+        
+    }
+    return $data;
+}
+
 
 
 function get_product_data_imgs($conn, $product_id) {
