@@ -11,7 +11,7 @@ function product_card($conn, $product_id) {
         <div class="card-body p-4">
             <div class="text-center">
                 <h5 class="fw-bolder"><?=$data["p_name"]?></h5>
-                <?=$data["price"][0]?><?=CURRENCY_SYMBOL?>
+                <?=$data["price"]?> <?=CURRENCY_SYMBOL?>
             </div>
         </div>
         <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
