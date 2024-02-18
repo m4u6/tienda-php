@@ -38,3 +38,15 @@ function render_product_listings($conn, $product_id_array) {
     echo "</section>\n";
 }
 
+
+function stock_message($stock) {
+    if ($stock >= 5) {
+        return "En stock";
+    }
+    if ($stock < 5) {
+        return "Quedan pocas unidades!";
+    }
+    if ($stock = 0) {
+        return "Sin stock";
+    }
+}

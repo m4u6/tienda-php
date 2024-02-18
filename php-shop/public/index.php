@@ -23,6 +23,7 @@ if (isset($_GET["seo_name"])) { # Ver pagina de producto
     }
     # Si llegamos aqui es que el seo_name tiene un producto relacionado, cargamos la vista de la pagina de producto
     require_once '../views/view.header.php';
+    $product_data = get_product_data_imgs($conn, $product_id);
     require_once '../views/view.product_page.php';
 } elseif (isset($_GET["search"])) { # Busquedas / otros ordenes para los productos
     require_once '../views/view.header.php';
