@@ -148,6 +148,13 @@ function handle_upload($files, &$errors, $product_id, $conn) {
         $extension=strtolower(end(explode('.',$name)));
         
         # Error handling
+
+        if ($name === "" && $tmp_name === "") {
+            # Siempre que se mande el formulario existira $_FILES["img"], con todos los campos vacios.
+            # Si $name y $tmp_name son strings vacias, hacemos continue
+            continue;
+        }
+
         $error_count=count($errors);
         if ($size > MAX_IMG_SIZE) {
             $errors["too_large_img".$i]="Error, la imagen $name es muy grande.";
@@ -189,3 +196,15 @@ function handle_upload($files, &$errors, $product_id, $conn) {
 
 
 
+
+function get_last_product_id($conn) {
+    $query = "SELECT MAX(product_id) AS product_id FROM products";
+    $result = mysqli_query($conn, $query);
+    if ($result) {
+        $row = mysqli_fetch_assoc($result);
+        mysqli_free_result($result);
+        return $row["product_id"];
+    } else {
+        return false;
+    }
+}

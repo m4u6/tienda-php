@@ -29,7 +29,7 @@ if (isset($_GET["seo_name"])) { # Ver pagina de producto
     echo "busca";
 } else { # Si se entra a la pagina normal
     require_once '../views/view.header.php';
-    $product_id_array = array(1, 2, 3, 4, 5);
+    $product_id_array = array(1, 2, 3, 4, 5, 6, 7, 8);
     render_product_listings($conn, $product_id_array);
 }
     

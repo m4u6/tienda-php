@@ -1,6 +1,5 @@
 <!-- Page content-->
 <div class="container-fluid">
-    <?php var_dump($_SESSION["product_data"]) ?>
     <h2>Editor de productos</h2>
     <?php require '../../views/view.error_bubble.php'; ?>
     <form action="productos.php" method="post" enctype="multipart/form-data" class="py-3" >
