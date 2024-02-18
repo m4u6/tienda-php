@@ -41,13 +41,14 @@ function render_product_listings($conn, $product_id_array, $section_title=false)
 
 
 function stock_message($stock) {
+    if ($stock == 0) {
+        return "Sin stock";
+    }
     if ($stock >= 5) {
         return "En stock";
     }
     if ($stock < 5) {
         return "Quedan pocas unidades!";
     }
-    if ($stock = 0) {
-        return "Sin stock";
-    }
+
 }
