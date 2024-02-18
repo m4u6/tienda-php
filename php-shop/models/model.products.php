@@ -9,8 +9,10 @@ $query_productos = array(
     "seo_name" => "URL Amigable"
   );
 
+
 function query_products($conn, $columns=NULL) {
-    # columns shoudl be an array of the columns that should be queried. If left blank it will query all columns.
+    # $columns se refiere a las columnas que pedir en el query. Mirar el array $query_productos como referencia.
+    # Esta funcion esta pensada para la tabla de productos del dashboard
     if ($columns === NULL) {
         $cols="*";
     } else {

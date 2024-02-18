@@ -2,3 +2,13 @@ RewriteEngine On
 #RewriteCond %{QUERY_STRING} ^seo_name=(.*)
 #RewriteRule ^index\.php$ /producto/%1? [R=301,L]
 RewriteRule ^producto/(.*)$ /index.php?seo_name=$1 [L]
+# Rewrites busqueda
+# Redirect /index.php?search=fun to /search/fun
+RewriteCond %{ENV:REDIRECT_STATUS} ^$
+RewriteCond %{QUERY_STRING} ^search=(.*)
+RewriteRule ^index\.php$ /search/%1? [R=301,L]
+
+# Rewrite /search/fun to /index.php?search=fun internally
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^search/(.*)$ /index.php?search=$1 [L]

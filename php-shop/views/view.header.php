@@ -39,6 +39,11 @@
                         <?php echo admin_check($conn) ? "<li class=\"nav-item\"><a class=\"nav-link\" href=\"/dashboard/\">Dashboard</a></li>" : "" ?>
                         <?php echo is_logged($conn) ? "<li class=\"nav-item\"><a class=\"nav-link\" href=\"/logout.php\">Cerrar sesión</a></li>" : "" ?>
                     </ul>
+                    
+                    <form method="get" action="/index.php" class="d-flex form-inline my-2 my-lg-0 mx-2">
+                        <input class="form-control mr-sm-2" name="search" type="search" placeholder="Buscar" aria-label="Buscar">
+                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
+                    </form>
                     <form class="d-flex">
                         <button class="btn btn-outline-dark" type="submit">
                             <i class="bi-cart-fill me-1"></i>

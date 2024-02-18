@@ -25,10 +25,11 @@ function product_card($conn, $product_id) {
 }
 
 
-function render_product_listings($conn, $product_id_array) {
+function render_product_listings($conn, $product_id_array, $section_title=false) {
     # Esta funcion espera un array de product_id. Usara la fuincion product_card() para crear cada una de las tarjetas
     echo "<section class=\"py-5\">\n";
     echo "<div class=\"container px-4 px-lg-5 my-5\">\n";
+    echo $section_title ? "<h2 class=\"fw-bolder mb-4\">$section_title</h2>" : "";
     echo "<div class=\"row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center\">\n";
     foreach ($product_id_array as $product_id) {
         product_card($conn, $product_id);
