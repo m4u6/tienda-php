@@ -86,5 +86,39 @@ function items_carrito() {
     }
 }
 
+function total_price_cart($conn) {
+    $running_total=0;
+    foreach ($_SESSION["cart_array"] as $product_id => $units) {
+        $datos_producto = get_product_data_imgs($conn, $product_id);
+        $total_item = floatval($datos_producto["price"]) * intval($units);
+        $running_total+=$total_item;
+    }
+    return $running_total;
+}
 
-#function buy_cart($conn, $user_id) {}
+
+
+function buy_cart($conn, $order_address,$user_id=NULL) {
+    if ($user_id === NULL) {
+        $user_id = $_SESSION["logged_as"]["user_id"];
+    }
+
+    $insert_query = "INSERT INTO orders (user_id, checkout_price, order_address) VALUES ($user_id, " . total_price_cart($conn) . ")";
+    
+    if ($mysqli->query($insert_query) === true) {
+        # No ha habido errores, nos guardamos el order_id
+        $order_id = $mysqli->insert_id;
+        echo "Order placed successfully. Order ID: $order_id";
+    } else {
+        throw new Exception($mysqli->error);
+    }
+
+    # Ya hemos creado el pedido ahora tenemos que añadir los productos al pedido (tabla orders-products)
+    foreach ($_SESSION["cart_array"] as $product_id => $units) {
+        $datos_producto = get_product_data_imgs($conn, $product_id);
+        $insert_query = "INSERT INTO orders-products (order_id, product_id, price_per_unit, quantity) VALUES ($order_id, $product_id," . floatval($datos_producto["price"]) .", $units)";          
+        $mysqli->query($insert_query);
+    }
+}
+
+?>

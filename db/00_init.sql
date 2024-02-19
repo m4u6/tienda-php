@@ -109,6 +109,7 @@ CREATE TABLE IF NOT EXISTS orders (
     user_id INT,
     checkout_price DECIMAL(10, 2),
     order_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    order_address VARCHAR(255),
     deal_id INT,
     status ENUM('procesando', 'enviado', 'pagado', 'contactar soporte', 'completado'),    -- puede que lo ideal sea tener una tabla aparte para los estados, pero no me voy a complicar por ahora
     FOREIGN KEY (user_id) REFERENCES users(user_id),
