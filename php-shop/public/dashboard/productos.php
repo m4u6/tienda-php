@@ -13,6 +13,14 @@ require_once '../../views/view.f.product_presentation.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $errors = [];
+    if (isset($_POST["delete_product"])) {
+        delete_product($conn, $_POST["delete_product"]);
+        header("Location: " . $_SERVER["HTTP_REFERER"]);
+        die();
+    }
+
+
+
     # Hay que implementar control de errores (ej is_valid_seo_name()), mirar que no todos los campos esten vacios, ademas del control de las imagenes
     if ($_POST["edit"] == "new" && ! $errors) {
         try {

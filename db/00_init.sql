@@ -42,7 +42,7 @@ CREATE TABLE IF NOT EXISTS images (
     img_name VARCHAR(255),
     img_placeholder VARCHAR(255),
     product_id INT,
-    FOREIGN KEY (product_id) REFERENCES products(product_id)
+    FOREIGN KEY (product_id) REFERENCES products(product_id)  ON DELETE CASCADE
 );
 
 
@@ -122,8 +122,8 @@ CREATE TABLE IF NOT EXISTS orders_products (
     product_id INT,
     price_per_unit DECIMAL(10, 2),
     quantity INT,
-    FOREIGN KEY (order_id) REFERENCES orders(order_id),
-    FOREIGN KEY (product_id) REFERENCES products(product_id)
+    FOREIGN KEY (order_id) REFERENCES orders(order_id) ON DELETE CASCADE,
+    FOREIGN KEY (product_id) REFERENCES products(product_id) ON DELETE SET NULL
 );
 
 -- Tabla comentarios / ratings

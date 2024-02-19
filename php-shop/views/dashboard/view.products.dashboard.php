@@ -15,6 +15,15 @@
     sortable_table($data, $no_sort_array);
     
 ?>
-    
+<div class="row">
+    <div class="col-10"><h3 class="mt-4">Eliminar productos</h3></div>
+</div>
+<form action="/dashboard/productos.php" method="post" >
+    <div class="mb-3 col-2">
+            <label for="delete_product" name="delete_product" class="form-label">ID Producto:</label>
+            <input type="number" step="1" min="0" name="delete_product" class="form-control" id="delete_product" required>
+        </div>
+    <button type="submit" class="btn btn-danger">Eliminar</button>
+</form>
 </div>
 

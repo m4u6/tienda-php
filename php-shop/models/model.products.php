@@ -151,3 +151,11 @@ function product_id_to_name($conn, $product_id) {
         throw new Exception("Ese producto no existe");
     }
 }
+
+
+
+function delete_product($conn, $product_id) {
+    $delete_query = "DELETE FROM products WHERE product_id = $product_id";
+    mysqli_query($conn, $delete_query);
+}
+

@@ -12,7 +12,7 @@
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Más</a>
                                     <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                        <a class="dropdown-item" href="/productos.php?edit=new">Nuevo producto</a>
+                                        <a class="dropdown-item" href="/dashboard/productos.php?edit=new">Nuevo producto</a>
                                         <!--<a class="dropdown-item" href="#!">Another action</a>-->
                                         <div class="dropdown-divider"></div>
                                         <a class="dropdown-item" href="../logout.php">Cerrar sesión</a>
