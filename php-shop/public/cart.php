@@ -29,25 +29,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         } catch (Exception $e) {
             # Este bloque de codigo se ejecuta cuando no podemos obtener el product_id del producto
             $errors["unable_get_product_id"] = "Hubo un error añadiendo el producto al carrito. Intentelo mas tarde o contacte con soporte.";
-            #$_SESSION["errors"] = $errors;
-            #header("Location: ". $_SERVER["HTTP_REFERER"]);
-            #die();
+            $_SESSION["errors"] = $errors;
+            header("Location: ". $_SERVER["HTTP_REFERER"]);
+            die();
         }
     }
-    # Hay que comprobar si el producto ya esta en el carrito
+    # Hay que comprobar si el producto ya esta en el carrito -> Se hace en la funcion
 
-
-    if (isset($_POST["cantidad_unidades"]) and ! $errors) {
-        $stock = load_product_data($product_id, $conn)["stock"];
-        if ($stock == 0) {
-            # No hay stock no se puede añadir al carrito
-            $errors["no_stock"] = "No tenemos stock de este producto";
-        } elseif ($stock < $_POST["cantidad_unidades"]) {
-            # Se han pedido mas unidades de las disponibles
-            $errors["stock_enough"] = "No tenemos tantas unidades en stock, hemos actualizado tu carrito";
+    if (isset($_POST["cantidad_unidades"])) {
+        try {
+            add_to_cart($product_id, intval($_POST["cantidad_unidades"]), $errors);
+        } catch (Exception $e) {
+            $errors["bad_cart"] = "El producto no se pudo añadir al carrito";
         }
     }
-    if ($errors) {
+
+    if ($errors) { 
         $_SESSION["errors"] = $errors;
         header("Location: ". $_SERVER["HTTP_REFERER"]);
         die();
@@ -55,7 +52,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     # Si llegamos aqui es que no hay errores y el podemos añadir al carrito.
     #$_SESSION["cart_array"][] = ["product_id" => $product_id, "units" => $_POST["cantidad_unidades"]];
-    $_SESSION["cart_array"]["product_id"] = $_POST["cantidad_unidades"];
+    #$_SESSION["cart_array"]["product_id"] = $_POST["cantidad_unidades"];
 
 
     # Una vez añadido el item al carrito, volvemos a donde estaba el usuario
@@ -66,7 +63,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 
 require_once '../views/view.header.php';
-
+var_dump($_SESSION["cart_array"]);
 
 
 require_once '../views/view.footer.php';
