@@ -18,6 +18,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST["address"])) {
         buy_cart($conn, $_POST["address"]);
     }
+
+    if (isset($_POST["delete_from_cart"])) {
+        unset($_SESSION["cart_array"][$_POST["delete_from_cart"]]);
+        header("Location: /cart.php");
+        die();
+    }
+
     $errors = [];
     
     # Este codigo se mueve a la funcion que añade productos al carrito

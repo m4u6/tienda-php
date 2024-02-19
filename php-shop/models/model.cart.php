@@ -35,6 +35,18 @@ function add_to_cart($product_id, $units, &$errors, $conn) {
 
 }
 
+function gen_delete_from_cart_button($product_id) {
+    ?>
+    <form action="/cart.php" method="post">
+        <input type="hidden" name="delete_from_cart" value="<?=$product_id?>">
+        <button type="submit" class="btn btn-danger">Eliminar</button>
+    </form>
+    <?php
+}
+
+
+
+
 # Esta funcion es mitad view, pero bueno...
 function cart_table($conn) {
     # La tabla tendra las columnas: nombre producto - precio por unidad - unidades - precio total
@@ -59,6 +71,7 @@ function cart_table($conn) {
       <th scope="col">Precio por unidad</th>
       <th scope="col">Unidades</th>
       <th scope="col">Total</th>
+      <th scope="col"> </th>
     </tr>
     </thead>
     <tbody>
@@ -72,6 +85,9 @@ function cart_table($conn) {
             echo "<td>$units</td>";
             $total = floatval($datos_producto["price"]) * intval($units);
             echo "<td>$total " . CURRENCY_SYMBOL . "</td>";
+            echo "<td>";
+            gen_delete_from_cart_button($product_id);
+            echo "</td>";
         echo "</tr>\n";
         $running_total+=$total;
     }
