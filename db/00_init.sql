@@ -116,7 +116,7 @@ CREATE TABLE IF NOT EXISTS orders (
     FOREIGN KEY (deal_id) REFERENCES deals(deal_id)
 );
 
-CREATE TABLE IF NOT EXISTS orders-products (
+CREATE TABLE IF NOT EXISTS orders_products (
     order_product_id INT AUTO_INCREMENT PRIMARY KEY,
     order_id INT,
     product_id INT,
