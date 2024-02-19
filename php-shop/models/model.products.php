@@ -49,6 +49,25 @@ function add_edit_product_to_table($data) {
     return $data;
 }
 
+
+# Antes estaba en model.edit_product.php
+# Esta funcion se hizo antes de get_product_data_imgs()
+function load_product_data($product_id, $conn) {
+    $query = "SELECT * FROM products WHERE product_id=" . $product_id . ";";
+    $results = mysqli_query($conn, $query);
+    if ($results) {
+        $row = mysqli_fetch_assoc($results);
+        if ($row) {
+            return $row;
+        } else {
+            return False;
+        }
+    }
+}
+
+
+
+
 function add_view_product_to_table($data) {
     for ($i = 1; $i <= count($data); $i++) {
         #$edit_array = array("Edit" => "<a href=\"productos.php?edit=$data[$i][\"ID\"]\">Editar producto</a>");

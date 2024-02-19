@@ -11,13 +11,16 @@
                             <span><?=$product_data["price"]?> <?=CURRENCY_SYMBOL?></span>
                         </div>
                         <p class="lead"><?=$product_data["p_description"]?></p>
-                        <div class="d-flex">
-                            <input class="form-control text-center me-3" name="cantidad_unidades" id="cantidad_unidades" type="num" value="1" style="max-width: 3rem" />
-                            <button class="btn btn-outline-dark flex-shrink-0" type="button">
-                                <i class="bi-cart-fill me-1"></i>
-                                Añadir al carrito
-                            </button>
-                        </div>
+                        <form method="post" action="/cart.php">
+                            <div class="d-flex">
+                                <input type="hidden" name="seo_name_carrito" value="<?=$product_data["seo_name"]?>">
+                                <input class="form-control text-center me-3" name="cantidad_unidades" id="cantidad_unidades" type="num" value="1" style="max-width: 3rem" />
+                                <button class="btn btn-outline-dark flex-shrink-0" type="submit">
+                                    <i class="bi-cart-fill me-1"></i>
+                                    Añadir al carrito
+                                </button>
+                            </div>
+                        <form>
                     </div>
                 </div>
             </div>

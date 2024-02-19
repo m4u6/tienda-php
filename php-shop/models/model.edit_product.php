@@ -8,18 +8,6 @@ function new_or_edit_product($get_edit, $conn) {
     }
 }
 
-function load_product_data($product_id, $conn) {
-    $query = "SELECT * FROM products WHERE product_id=" . $product_id . ";";
-    $results = mysqli_query($conn, $query);
-    if ($results) {
-        $row = mysqli_fetch_assoc($results);
-        if ($row) {
-            return $row;
-        } else {
-            return False;
-        }
-    }
-}
 
 function is_valid_seo_name($seo_name, $conn, $product_id=0) {
     # Primero comprbar si no tiene espacios u otros caracteres prohibidos
