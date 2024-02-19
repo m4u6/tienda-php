@@ -1,6 +1,6 @@
 <?php
 
-# Los productos que contiene el carrito se guardaran en un array $_SESSION["cart_array"] donde cada item sera otro array ["product_id" => $id, "units" => units]
+# Los productos que contiene el carrito se guardaran en un array $_SESSION["cart_array"] donde cada el key sera el product_id y el value sera el numero de items
 
 function add_to_cart($product_id, $units, &$errors, $conn) {
     if (isset($_SESSION["cart_array"]) === False) {
@@ -35,4 +35,31 @@ function add_to_cart($product_id, $units, &$errors, $conn) {
 
 }
 
-
+# Esta funcion es mitad view, pero bueno...
+function cart_table($conn) {
+    # La tabla tendra las columnas: nombre producto - precio por unidad - unidades - precio total, y la 
+    echo "<table class=\"table\">\n";
+    # Table head ?>
+    <thead class="thead-dark">
+    <tr>
+      <th scope="col">Producto</th>
+      <th scope="col">Precio por unidad</th>
+      <th scope="col">Unidades</th>
+      <th scope="col">Total</th>
+    </tr>
+    </thead>
+    <tbody>
+    <?php
+    foreach ($_SESSION["cart_array"] as $product_id => $units) {
+        $datos_producto = get_product_data_imgs($conn, $product_id);
+        echo "<tr>\n";
+            echo "<td><a href=\"/producto/" . $datos_producto["seo_name"] . "\">" . $datos_producto["p_name"] . "</a></td>";
+            echo "<td>" . $datos_producto["price"] . " " . CURRENCY_SYMBOL . "</td>";
+            echo "<td>$units</td>";
+            $total = floatval($datos_producto["price"]) * intval($units);
+            echo "<td>$total " . CURRENCY_SYMBOL . "</td>";
+        echo "</tr>\n";
+    }
+    echo "</tbody>\n";
+    echo "</table>\n";
+}

@@ -27,6 +27,7 @@ if (isset($_GET["seo_name"])) { # Ver pagina de producto
 
     define('PAGE_TITLE', $product_data["p_name"]);
     require_once '../views/view.header.php';
+    require_once '../views/view.error_bubble.php';
     require_once '../views/view.product_page.php';
     
     # Productos relacionados
