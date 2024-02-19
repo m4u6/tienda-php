@@ -107,15 +107,21 @@ CREATE TABLE IF NOT EXISTS deals (
 CREATE TABLE IF NOT EXISTS orders (
     order_id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT,
-    product_id INT,
-    quantity INT,
     checkout_price DECIMAL(10, 2),
     order_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     deal_id INT,
     status ENUM('procesando', 'enviado', 'pagado', 'contactar soporte', 'completado'),    -- puede que lo ideal sea tener una tabla aparte para los estados, pero no me voy a complicar por ahora
     FOREIGN KEY (user_id) REFERENCES users(user_id),
-    FOREIGN KEY (product_id) REFERENCES products(product_id),
     FOREIGN KEY (deal_id) REFERENCES deals(deal_id)
+);
+
+CREATE TABLE IF NOT EXISTS orders-products (
+    order_product_id INT AUTO_INCREMENT PRIMARY KEY,
+    order_id INT,
+    product_id INT,
+    quantity INT,
+    FOREIGN KEY (order_id) REFERENCES orders(order_id),
+    FOREIGN KEY (product_id) REFERENCES products(product_id)
 );
 
 -- Tabla comentarios / ratings
