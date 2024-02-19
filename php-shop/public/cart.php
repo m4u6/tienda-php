@@ -61,11 +61,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 require_once '../views/view.header.php';
-var_dump($_SESSION["cart_array"]);
 
 
 
-
+cart_table($conn);
 
 require_once '../views/view.footer.php';
 ?>

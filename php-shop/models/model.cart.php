@@ -37,9 +37,20 @@ function add_to_cart($product_id, $units, &$errors, $conn) {
 
 # Esta funcion es mitad view, pero bueno...
 function cart_table($conn) {
-    # La tabla tendra las columnas: nombre producto - precio por unidad - unidades - precio total, y la 
-    echo "<table class=\"table\">\n";
-    # Table head ?>
+    # La tabla tendra las columnas: nombre producto - precio por unidad - unidades - precio total
+    # No hacer la tabla si no hay productos en el carrito !!
+    # Añadir
+
+
+    if (@count($_SESSION["cart_array"]) == 0) {
+        echo "No hay productos en el carrito";
+        return False;
+    }
+
+
+    # Table head 
+    ?>
+    <table class="table mx-2">
     <thead class="thead-dark">
     <tr>
       <th scope="col">Producto</th>
@@ -50,6 +61,7 @@ function cart_table($conn) {
     </thead>
     <tbody>
     <?php
+    $running_total=0;
     foreach ($_SESSION["cart_array"] as $product_id => $units) {
         $datos_producto = get_product_data_imgs($conn, $product_id);
         echo "<tr>\n";
@@ -59,7 +71,20 @@ function cart_table($conn) {
             $total = floatval($datos_producto["price"]) * intval($units);
             echo "<td>$total " . CURRENCY_SYMBOL . "</td>";
         echo "</tr>\n";
+        $running_total+=$total;
     }
+    echo "<tr><td><b>Total:</b></td><td>$running_total " . CURRENCY_SYMBOL . "</td></tr>";
     echo "</tbody>\n";
     echo "</table>\n";
 }
+
+function items_carrito() {
+    if (@count($_SESSION["cart_array"]) == 0) {
+        return 0;
+    } else {
+        return @count($_SESSION["cart_array"]);
+    }
+}
+
+
+#function buy_cart($conn, $user_id) {}

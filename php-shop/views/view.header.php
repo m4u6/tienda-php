@@ -44,13 +44,11 @@
                         <input class="form-control mr-sm-2" name="search" type="search" placeholder="Buscar" aria-label="Buscar">
                         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
                     </form>
-                    <form class="d-flex">
-                        <button class="btn btn-outline-dark" type="submit">
+                        <a href="/cart.php" class="d-flex btn btn-outline-dark" type="submit">
                             <i class="bi-cart-fill me-1"></i>
                             Cart
-                            <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
-                        </button>
-                    </form>
+                            <span class="badge bg-dark text-white ms-1 rounded-pill"><?=items_carrito() ?></span>
+                        </a>
                 </div>
             </div>
         </nav>

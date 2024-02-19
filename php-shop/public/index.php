@@ -7,6 +7,7 @@ require_once '../models/model.dashboard.php';
 require_once '../models/model.login.php';
 require_once '../models/model.products.php';
 require_once '../models/model.search.php';
+require_once '../models/model.cart.php';
 
 require_once '../views/view.f.product_presentation.php';
 #require_once '../views/view.header.php';
