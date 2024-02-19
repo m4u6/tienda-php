@@ -19,34 +19,6 @@ $query_order_details = array(
 );
 
 
-function query_table($conn, $table ,$columns=NULL, $where=NULL) {
-    # $columns se refiere a las columnas que pedir en el query. Mirar el array $query_productos como referencia.
-    # Esta funcion esta pensada para la tabla de productos del dashboard
-    if ($columns === NULL) {
-        $cols="*";
-    } else {
-        $cols="";
-        foreach ($columns as $col => $alias) {
-            $cols.="$col AS '$alias', ";
-        }
-        $cols = rtrim($cols, ", ");
-    }
-    $query = "SELECT $cols FROM $table $where;";
-    $result = mysqli_query($conn, $query);
-    if ($result) {
-        $i=1;
-        $data=array();
-        while ($row = mysqli_fetch_assoc($result)) {
-            $data[$i] = $row;
-            $i++;
-        };
-        mysqli_free_result($result);
-        return $data;
-    } else {
-        # Error
-        echo "Error: " . mysqli_error($conn);
-    }
-}
 
 
 

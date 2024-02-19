@@ -5,7 +5,7 @@ session_start();
 define('PAGE_TITLE', 'Gestión de usuarios');
 require_once '../../models/model.dashboard.php';
 require_once '../../models/model.user_management.php';
-
+require_once '../../views/view.f.sortable_table.php';
 
 redirect_non_admin($conn);
 
