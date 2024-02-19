@@ -24,8 +24,8 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
                         <li class="nav-item"><a class="nav-link active" aria-current="page" href="#!">Home</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#!">About</a></li>
-                        <li class="nav-item dropdown">
+                        <li class="nav-item"><a class="nav-link" href="https://github.com/m4u6/tienda-php">About</a></li>
+                        <!--<li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Shop</a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <li><a class="dropdown-item" href="#!">All Products</a></li>
@@ -33,7 +33,7 @@
                                 <li><a class="dropdown-item" href="#!">Popular Items</a></li>
                                 <li><a class="dropdown-item" href="#!">New Arrivals</a></li>
                             </ul>
-                        </li>
+                        </li>-->
                         <?php echo is_logged($conn) ? "" : "<li class=\"nav-item\"><a class=\"nav-link\" href=\"/login.php\">Login</a></li>" ?>
                         <?php echo is_logged($conn) ? "" : "<li class=\"nav-item\"><a class=\"nav-link\" href=\"/signup.php\">Registrarse</a></li>" ?>
                         <?php echo admin_check($conn) ? "<li class=\"nav-item\"><a class=\"nav-link\" href=\"/dashboard/\">Dashboard</a></li>" : "" ?>
