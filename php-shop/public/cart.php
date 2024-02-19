@@ -11,7 +11,7 @@ require_once '../models/model.cart.php';
 
 
 require_once '../views/view.f.product_presentation.php';
-
+define('PAGE_TITLE', "Carrito");
 
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -65,14 +65,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 require_once '../views/view.header.php';
 
-cart_table($conn);
+require_once '../views/view.cart.php';
+
+#cart_table($conn);
 ?>
 
 
-<form method="post" action="/cart.php">
-    <input type="text" name="address">
-    <input type="submit">
-</form>
+
 
 
 <?php

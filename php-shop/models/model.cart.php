@@ -49,6 +49,8 @@ function cart_table($conn) {
 
 
     # Table head 
+    
+    #<div class="table-wrap">
     ?>
     <table class="table mx-2">
     <thead class="thead-dark">
@@ -76,6 +78,7 @@ function cart_table($conn) {
     echo "<tr><td><b>Total:</b></td><td>$running_total " . CURRENCY_SYMBOL . "</td></tr>";
     echo "</tbody>\n";
     echo "</table>\n";
+    #echo "</div>\n";
 }
 
 function items_carrito() {
