@@ -5,6 +5,7 @@ require_once '../config/db.php';
 require_once '../models/model.signup.php';
 require_once '../models/model.login.php';
 require_once '../models/model.dashboard.php';
+require_once '../models/model.cart.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     # Para el registro esperamos email, name, surname, password y password-check

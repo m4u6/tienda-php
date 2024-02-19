@@ -15,6 +15,9 @@ require_once '../views/view.f.product_presentation.php';
 
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (isset($_POST["address"])) {
+        buy_cart($conn, $_POST["address"]);
+    }
     $errors = [];
     
     # Este codigo se mueve a la funcion que añade productos al carrito
@@ -62,9 +65,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 require_once '../views/view.header.php';
 
-
-
 cart_table($conn);
+?>
+
+
+<form method="post" action="/cart.php">
+    <input type="text" name="address">
+    <input type="submit">
+</form>
+
+
+<?php
+
+
 
 require_once '../views/view.footer.php';
 ?>

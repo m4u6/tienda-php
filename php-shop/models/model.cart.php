@@ -97,28 +97,46 @@ function total_price_cart($conn) {
 }
 
 
+function reduce_stock($conn, $product_id, $units_to_reduce) {
+    # Si se quita mas del stock que hay nos quedamos en 0.
+    $update_query = "UPDATE products SET stock = GREATEST(stock - $units_to_reduce, 0) WHERE product_id = $product_id";
+
+    if (mysqli_query($conn, $update_query)) {
+        return True;
+    } else {
+        throw new Exception(mysqli_error($conn));
+    }
+};
+
+
+
 
 function buy_cart($conn, $order_address,$user_id=NULL) {
     if ($user_id === NULL) {
         $user_id = $_SESSION["logged_as"]["user_id"];
     }
 
-    $insert_query = "INSERT INTO orders (user_id, checkout_price, order_address) VALUES ($user_id, " . total_price_cart($conn) . ")";
+    $insert_query = "INSERT INTO orders (user_id, checkout_price, order_address) VALUES ($user_id, " . total_price_cart($conn) . ", '$order_address')";
     
-    if ($mysqli->query($insert_query) === true) {
+    if (mysqli_query($conn, $insert_query) === true) {
         # No ha habido errores, nos guardamos el order_id
-        $order_id = $mysqli->insert_id;
-        echo "Order placed successfully. Order ID: $order_id";
+        $order_id = mysqli_insert_id($conn);
     } else {
-        throw new Exception($mysqli->error);
+        throw new Exception(mysqli_error($conn));
     }
 
     # Ya hemos creado el pedido ahora tenemos que añadir los productos al pedido (tabla orders-products)
     foreach ($_SESSION["cart_array"] as $product_id => $units) {
         $datos_producto = get_product_data_imgs($conn, $product_id);
-        $insert_query = "INSERT INTO orders-products (order_id, product_id, price_per_unit, quantity) VALUES ($order_id, $product_id," . floatval($datos_producto["price"]) .", $units)";          
-        $mysqli->query($insert_query);
+        $insert_query = "INSERT INTO orders_products (order_id, product_id, price_per_unit, quantity) VALUES ($order_id, $product_id," . floatval($datos_producto["price"]) .", $units)";          
+        mysqli_query($conn, $insert_query);
+        reduce_stock($conn, $product_id, $units);
     }
+
+
+
+    unset($_SESSION["cart_array"]);
 }
+
 
 ?>
