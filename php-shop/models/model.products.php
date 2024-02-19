@@ -118,3 +118,36 @@ function seo_name_to_id($conn, $seo_name) {
         throw new Exception("Ese producto no existe");
     }
 }
+
+function product_id_to_seo_name($conn, $product_id) {
+    $sql = "SELECT seo_name FROM products WHERE product_id = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $product_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        return $row['seo_name'];
+    } else {
+        # Si el producto no existe lanzamos una excepcion
+        throw new Exception("Ese producto no existe");
+    }
+}
+
+
+function product_id_to_name($conn, $product_id) {
+    $sql = "SELECT p_name FROM products WHERE product_id = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $product_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        return $row['p_name'];
+    } else {
+        # Si el producto no existe lanzamos una excepcion
+        throw new Exception("Ese producto no existe");
+    }
+}

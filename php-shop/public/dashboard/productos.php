@@ -83,8 +83,6 @@ if (isset($_GET["edit"])) {
     require_once '../../views/dashboard/view.top_navbar.dashboard.php';
     # Actual content of the page
     require_once '../../views/dashboard/view.edit_product.dashboard.php';
-} elseif (isset($_GET["view"])) {
-    echo "s";
 } else {
     require_once '../../views/dashboard/view.head.dashboard.php';
     require_once '../../views/dashboard/view.sidebar.dashboard.php';
