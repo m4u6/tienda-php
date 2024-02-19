@@ -38,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if (isset($_POST["cantidad_unidades"])) {
         try {
-            add_to_cart($product_id, intval($_POST["cantidad_unidades"]), $errors);
+            add_to_cart($product_id, intval($_POST["cantidad_unidades"]), $errors, $conn);
         } catch (Exception $e) {
             $errors["bad_cart"] = "El producto no se pudo añadir al carrito";
         }

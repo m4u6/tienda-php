@@ -2,7 +2,7 @@
 
 # Los productos que contiene el carrito se guardaran en un array $_SESSION["cart_array"] donde cada item sera otro array ["product_id" => $id, "units" => units]
 
-function add_to_cart($product_id, $units, &$errors) {
+function add_to_cart($product_id, $units, &$errors, $conn) {
     if (isset($_SESSION["cart_array"]) === False) {
         # Si no esta creado el carrito lo creamos como un array vacio
         $_SESSION["cart_array"] = [];
@@ -18,7 +18,7 @@ function add_to_cart($product_id, $units, &$errors) {
     }
 
     # Comprobamos si hay stock suficiente para $total_units
-    $stock = load_product_data($product_id, $conn)["stock"];
+    $stock = intval(load_product_data($product_id, $conn)["stock"]);
     if ($stock == 0) {
         # No hay stock no se puede añadir al carrito
         $errors["no_stock"] = "No tenemos stock de este producto";
