@@ -45,7 +45,8 @@ if (isset($_GET["seo_name"])) { # Ver pagina de producto
 } else { # Si se entra a la pagina normal
     define('PAGE_TITLE', 'Index');
     require_once '../views/view.header.php';
-    $product_id_array = array(1, 2, 3, 4, 5, 6, 7, 8);
+    $product_id_array = search_product($conn, "", "p_name", "DESC", TRUE, 16);
+    shuffle($product_id_array);
     render_product_listings($conn, $product_id_array);
 }
     
